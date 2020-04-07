@@ -1,0 +1,58 @@
+<html>
+<body>
+	<canvas width="800" height="600" id="canvas"></canvas> //Se determina el tamaño del lienzo
+
+	<script>
+
+		var canvas = document.getElementById('canvas');//Se asigna el objeto canvas por medio de un identificador
+		var ctx = canvas.getContext('2d');//Determina que el lienzo va a estar en 2 dimensiones
+
+
+		var colFondo = '#721305'; //Define el color del fondo de la figura 
+		var colLinea = '#00ff00';//Define el color de delineado de la figura
+		var tamLinea = 5;//Define el grosor del delineado
+		var otroColor = '#00ffff';//Define el color de la figura
+
+		function dibujarCaja(x, y, anchura, altura, tamanoLinea, colorFondo, colorLinea) {//Define la funcion de la figura con sus respectivas caracteristicas
+
+
+			ctx.fillStyle = colorFondo;//Define el color de relleno como el color de fondo
+			ctx.strokeStyle = colorLinea;//Define el color de delineado como el color de linea
+			ctx.lineWidth = tamanoLinea;//Define el grosor de la linea como el tamaño de linea
+
+			ctx.beginPath();//Empieza a desarrollar la figura
+			ctx.moveTo(x,y);//Dibuja la primera linea
+			ctx.lineTo(x+anchura,y);//Traza la segunda linea
+			ctx.lineTo(x+anchura,y+altura);//Traza la tercera linea
+			ctx.lineTo(x,y+altura);//Traza la ultima linea para formar un cuadrado en este caso
+			ctx.closePath();//Termina de desarrolar la figura
+			
+			ctx.fill();//Llena la figura
+			ctx.stroke();//Dibuja el delineado
+		}
+
+		var f = 1;//Define las filas
+		while (f <= 8) {
+			var c = 1;
+			while (c <= 4) {
+
+				if (f == 7)//Si el numero de filas es igual a 7 llama a la funcion con sus coordenadas y con el primer color definido
+					dibujarCaja(c*60, f*60, 40, 40, 5, colFondo, colLinea);
+				else//Si no es igual a 7 cambia el color de la figura
+					dibujarCaja(c*60, f*60, 40, 40, 5, otroColor, colLinea);					
+
+				// Se dibujan 4 cajas por cada fila
+				// Las columnas van de 60 en 60
+				// Las filas van de 60 en 60
+				// Ancho = 40, Altura = 40 para todas
+				// Línea y colores iguales para todas
+
+				c = c + 1;
+			}
+			f = f + 1;
+		}
+		
+	</script>
+	
+</body>
+</html>
